@@ -1,0 +1,4 @@
+Flask-Ask @ git+https://github.com/srichter/flask-ask.git@flask2
+py-sonic==0.7.9
+requests==2.25.1
+fuzzywuzzy==0.18.0
