@@ -1,3 +1,9 @@
 launch_text: "Welcome to Ask Sonic. Ask me to play an artist or song."
 launch_title: "Welcome to AskSonic!"
 launch_content: "Ask me to play an artist or song."
+
+pausing: "Pausing"
+resuming: "Resuming"
+stopping: "Stopping"
+
+playing_library_text: "Playing music from your library"
