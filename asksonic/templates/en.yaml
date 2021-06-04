@@ -1,9 +1,12 @@
-launch_text: "Welcome to Ask Sonic. Ask me to play an artist or song."
+launch_text: "Welcome to Ask Sonic. Ask me to play an artist or song. You can also ask me to play a playlist or your library."
 launch_title: "Welcome to AskSonic!"
-launch_content: "Ask me to play an artist or song."
+launch_content: "Ask me to play an artist or song. You can also ask me to play a playlist or your library."
 
 pausing: "Pausing"
 resuming: "Resuming"
 stopping: "Stopping"
 
 playing_library_text: "Playing music from your library"
+
+end_of_queue: "There is no more music queued"
+nothing_playing: "There is no music playing"

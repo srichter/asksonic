@@ -1,10 +1,12 @@
+from asksonic.utils.response import track_response
 from flask import render_template
 from flask_ask import question, audio
-from asksonic import ask, songs_count
-from asksonic.utils.subsonic import subsonic, getStreamUrl, getCoverArtUrl
+from asksonic import ask, logger, tracks_count
+from asksonic.utils.subsonic.api import subsonic
 from . import queue
 
 
+@ask.intent('AMAZON.HelpIntent')
 @ask.launch
 def launch() -> question:
     return question(render_template('launch_text')) \
@@ -15,14 +17,12 @@ def launch() -> question:
 
 
 @ask.intent('AskSonicShuffleLibraryIntent')
-def play_random_tracks():
-    tracks = subsonic.getRandomSongs(songs_count)
-    queue.reset(tracks['randomSongs']['song'])
-    track = queue.start()
-    return audio(render_template('playing_library_text')) \
-        .play(getStreamUrl(track['id'])) \
-        .metadata(
-            title=track['title'],
-            subtitle='{} - {}'.format(track['artist'], track['album']),
-            image=getCoverArtUrl(track['id'])
-        )
+def play_random_tracks() -> audio:
+    tracks = subsonic.random_tracks(tracks_count)
+    track = queue.reset(tracks)
+    return track_response(track, render_template('playing_library_text'))
+
+
+def log(msg: str) -> None:
+    logger.debug(msg)
+    logger.debug(queue.status)

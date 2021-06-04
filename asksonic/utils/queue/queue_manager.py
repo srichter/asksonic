@@ -5,9 +5,10 @@
 import collections
 from copy import copy
 from typing import Optional
+from asksonic.utils.subsonic.track import Track
 
 
-class QueueManager(object):
+class QueueManager():
     """Manages queue data in a separate context from current_stream.
     The flask-ask Local current_stream refers only to the current data from
     Alexa requests and Skill Responses. Alexa Skills Kit does not provide
@@ -17,86 +18,108 @@ class QueueManager(object):
     to move throughout a queue.
     """
 
-    def __init__(self, tracks: list[Optional[dict]] = []) -> None:
-        self.reset(tracks)
+    def __init__(self, tracks: list[Track] = None) -> None:
+        self.clear()
+        if tracks:
+            self.extend(tracks)
 
     @property
     def status(self) -> dict:
+        """Information about the queue"""
         status = {
             'Current Position': self.current_position,
             'Current Track': self.current,
             'Next Track': self.up_next,
-            'Previous': self.previous,
+            'Previous': self.last,
             'History': list(self.history)
         }
         return status
 
     @property
-    def up_next(self) -> Optional[dict]:
-        """Returns the track at the front of the queue"""
-        qcopy = copy(self._queued)
-        try:
-            return qcopy.popleft()
-        except IndexError:
-            return None
+    def current_position(self) -> int:
+        """Number of Tracks played (including current)"""
+        return len(self.history) + 1
 
     @property
-    def current(self) -> Optional[dict]:
+    def current(self) -> Optional[Track]:
+        """The current Track"""
         return self._current
 
     @current.setter
-    def current(self, track: dict) -> None:
-        self._save_to_history()
+    def current(self, track: Optional[Track]) -> None:
+        if self.current:
+            self.history.append(self.current)
         self._current = track
 
     @property
-    def history(self) -> collections.deque:
-        return self._history
-
-    @property
-    def previous(self) -> Optional[dict]:
-        history = copy(self.history)
+    def up_next(self) -> Optional[Track]:
+        """The Track at the front of the queue"""
         try:
-            return history.pop()
+            return self._queue[0]
         except IndexError:
             return None
 
-    def add(self, track: dict) -> None:
-        self._tracks.append(track)
-        self._queued.append(track)
+    @property
+    def last(self) -> Optional[Track]:
+        """The most recently played Track"""
+        try:
+            return self.history[-1]
+        except IndexError:
+            return None
 
-    def extend(self, tracks: list[dict]) -> None:
-        self._tracks.extend(tracks)
-        self._queued.extend(tracks)
+    @property
+    def history(self) -> collections.deque:
+        """Previously played Tracks"""
+        return self._history
 
-    def _save_to_history(self) -> None:
-        if self._current:
-            self._history.append(self._current)
+    def next(self) -> Optional[Track]:
+        """Move forward one Track"""
+        if self.up_next:
+            return self._step_forward()
+
+    def previous(self) -> Optional[Track]:
+        """Move backward one Track.
+        If there is no history, return the same Track"""
+        if self.history:
+            return self._step_backward()
+        return self.current
+
+    def add(self, track: Track) -> None:
+        """Add a Track to the end of the queue"""
+        self._queue.append(track)
+
+    def extend(self, tracks: list[Track]) -> None:
+        """Add Tracks to the end of the queue"""
+        self._queue.extend(tracks)
+
+    def prepend(self, track: Track) -> None:
+        """Add a Track to the beginning of the queue"""
+        self._queue.appendleft(track)
 
     def end_current(self) -> None:
-        self._save_to_history()
-        self._current = None
+        """Move the current Track to history"""
+        self.current = None
 
-    def step(self) -> Optional[dict]:
-        self.end_current()
-        self._current = self._queued.popleft()
-        return self._current
+    def reset(self, tracks: list[Track]) -> Track:
+        """Replace the queue with Tracks and play the first one"""
+        self.clear()
+        self._queue = collections.deque(tracks)
+        return self._step_forward()
 
-    def step_back(self) -> Optional[dict]:
-        self._queued.appendleft(self._current)
-        self._current = self._history.pop()
-        return self._current
-
-    def reset(self, tracks: list[Optional[dict]]) -> None:
-        self._tracks = tracks
-        self._queued = collections.deque(tracks)
+    def clear(self) -> None:
+        """Clear the queue and history"""
+        self._queue = collections.deque()
         self._history = collections.deque()
         self._current = None
 
-    def start(self) -> Optional[dict]:
-        self.__init__(self._tracks)
-        return self.step()
+    def _step_forward(self) -> Track:
+        track = self._queue.popleft()
+        self.current = track
+        return track
 
-    @property
-    def current_position(self) -> int:
-        return len(self._history) + 1
+    def _step_backward(self) -> Track:
+        if self.current:
+            self._queue.appendleft(self.current)
+        track = self.history.pop()
+        self._current = track
+        return track
