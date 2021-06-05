@@ -1,4 +1,4 @@
-from asksonic.utils.response import track_response
+from asksonic.utils.response import play_track_response
 from flask import render_template
 from flask_ask import question, audio
 from asksonic import ask, logger, tracks_count
@@ -20,7 +20,7 @@ def launch() -> question:
 def play_random_tracks() -> audio:
     tracks = subsonic.random_tracks(tracks_count)
     track = queue.reset(tracks)
-    return track_response(track, render_template('playing_library_text'))
+    return play_track_response(track, render_template('playing_library_text'))
 
 
 def log(msg: str) -> None:

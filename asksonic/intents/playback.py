@@ -3,18 +3,38 @@ from flask.templating import render_template
 from asksonic import ask, logger
 from flask_ask import audio
 from . import queue
-from asksonic.utils.response import empty_response, track_response
+from asksonic.utils.response import empty_response, enqueue_track_response, \
+    play_track_response
 
 
 @ask.on_playback_started()
-def started() -> tuple:
+def playback_started() -> tuple:
     log('Playback Started')
+    queue.current.scrobble(submission=False)
     return empty_response
 
 
 @ask.on_playback_stopped()
-def stopped() -> tuple:
+def playback_stopped() -> tuple:
     log('Playback Stopped')
+    return empty_response
+
+
+@ask.on_playback_nearly_finished()
+def playback_nearly_finished() -> Union[audio, tuple]:
+    log('Playback Nearly Finished')
+    queue.current.scrobble(submission=True)
+    if queue.up_next:
+        log('Enqueuing Next Track')
+        return enqueue_track_response(queue.up_next)
+    log('Reached End of Queue')
+    return empty_response
+
+
+@ask.on_playback_finished()
+def playback_finished() -> tuple:
+    log('Playback Finished')
+    queue.next()
     return empty_response
 
 
@@ -51,7 +71,7 @@ def next_track() -> audio:
     log('Next Track')
     track = queue.next()
     if track:
-        return track_response(track)
+        return play_track_response(track)
     return audio(render_template('end_of_queue'))
 
 
@@ -60,7 +80,15 @@ def previous_track() -> audio:
     log('Previous Track')
     track = queue.previous()
     if track:
-        return track_response(track)
+        return play_track_response(track)
+    return audio(render_template('nothing_playing'))
+
+
+@ask.intent('AMAZON.StartOverIntent')
+def restart_track() -> audio:
+    log('Restart Track')
+    if queue.current:
+        return play_track_response(queue.current)
     return audio(render_template('nothing_playing'))
 
 
@@ -79,11 +107,11 @@ def pause_command() -> audio:
 
 
 @ask.on_playback_next_command()
-def next_command() -> Union[audio, tuple]:
+def next_command() -> audio:
     log('Next Track Command Issued')
     track = queue.next()
     if track:
-        return track_response(track)
+        return play_track_response(track)
     return audio().stop()
 
 
@@ -92,7 +120,7 @@ def previous_command() -> Union[audio, tuple]:
     log('Previous Track Command Issued')
     track = queue.previous()
     if track:
-        return track_response(track)
+        return play_track_response(track)
     return empty_response
 
 

@@ -4,7 +4,7 @@
 
 import collections
 from copy import copy
-from typing import Optional
+from typing import Optional, Union
 from asksonic.utils.subsonic.track import Track
 
 
@@ -24,7 +24,7 @@ class QueueManager():
             self.extend(tracks)
 
     @property
-    def status(self) -> dict:
+    def status(self) -> dict[str, Union[str, list[str]]]:
         """Information about the queue"""
         status = {
             'Current Position': self.current_position,
@@ -76,6 +76,7 @@ class QueueManager():
         """Move forward one Track"""
         if self.up_next:
             return self._step_forward()
+        self.end_current()
 
     def previous(self) -> Optional[Track]:
         """Move backward one Track.

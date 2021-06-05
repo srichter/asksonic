@@ -57,8 +57,8 @@ class Track():
         return f'{self.artist} - {self.album}'
 
     @property
-    def download_url(self) -> str:
-        request = self._subsonic._getRequest('download.view', {'id': self.id})
+    def stream_url(self) -> str:
+        request = self._subsonic._getRequest('stream.view', {'id': self.id})
         return self._subsonic.request_url(request)
 
     @property
@@ -70,9 +70,13 @@ class Track():
         return self._subsonic.request_url(request)
 
     @property
-    def metadata(self) -> dict:
+    def metadata(self) -> dict[str, str]:
         return {
             'title': self.title,
             'subtitle': self.subtitle,
             'image': self.cover_art_url,
         }
+
+    def scrobble(self, submission: bool = False) -> None:
+        submit = 'true' if submission else 'false'
+        self._subsonic.scrobble(self.id, submission=submit)
