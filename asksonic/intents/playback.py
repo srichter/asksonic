@@ -1,7 +1,7 @@
 from typing import Union
 from flask.templating import render_template
 from asksonic import ask, logger
-from flask_ask import audio
+from flask_ask import audio, request, statement
 from . import queue
 from asksonic.utils.response import empty_response, enqueue_track_response, \
     play_track_response
@@ -45,11 +45,11 @@ def pause() -> audio:
 
 
 @ask.intent('AMAZON.ResumeIntent')
-def resume() -> Union[audio, tuple]:
+def resume() -> Union[audio, statement]:
     log('Playback Resuming')
     if queue.current:
         return audio().resume()
-    return empty_response
+    return statement(render_template('nothing_playing'))
 
 
 @ask.intent('AMAZON.StopIntent')
@@ -67,29 +67,29 @@ def cancel() -> audio:
 
 
 @ask.intent('AMAZON.NextIntent')
-def next_track() -> audio:
+def next_track() -> Union[audio, statement]:
     log('Next Track')
     track = queue.next()
     if track:
         return play_track_response(track)
-    return audio(render_template('end_of_queue'))
+    return statement(render_template('end_of_queue'))
 
 
 @ask.intent('AMAZON.PreviousIntent')
-def previous_track() -> audio:
+def previous_track() -> Union[audio, statement]:
     log('Previous Track')
     track = queue.previous()
     if track:
         return play_track_response(track)
-    return audio(render_template('nothing_playing'))
+    return statement(render_template('nothing_playing'))
 
 
 @ask.intent('AMAZON.StartOverIntent')
-def restart_track() -> audio:
+def restart_track() -> Union[audio, statement]:
     log('Restart Track')
     if queue.current:
         return play_track_response(queue.current)
-    return audio(render_template('nothing_playing'))
+    return statement(render_template('nothing_playing'))
 
 
 @ask.on_playback_play_command()
@@ -122,6 +122,34 @@ def previous_command() -> Union[audio, tuple]:
     if track:
         return play_track_response(track)
     return empty_response
+
+
+@ask.default_intent
+@ask.intent('AMAZON.FallbackIntent')
+@ask.intent('AMAZON.LoopOffIntent')
+@ask.intent('AMAZON.LoopOnIntent')
+@ask.intent('AMAZON.RepeatIntent')
+@ask.intent('AMAZON.ShuffleOffIntent')
+@ask.intent('AMAZON.ShuffleOnIntent')
+def unsupported_intent() -> statement:
+    log(f'Unsupported Intent {request.intent.name}')  # type: ignore
+    return statement(render_template('intent_not_supported'))
+
+
+@ask.intent('AskSonicTrackInformationIntent')
+def track_information() -> statement:
+    log('Current Track Information')
+    track = queue.current
+    if not track:
+        return statement(render_template('nothing_playing'))
+    return statement(
+        render_template('current_track')
+        + render_template(
+            'track_information',
+            title=track.title,
+            artist=track.artist
+        )
+    )
 
 
 def log(msg: str) -> None:

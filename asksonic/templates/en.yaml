@@ -8,5 +8,9 @@ stopping: "Stopping"
 
 playing_library_text: "Playing music from your library"
 
+current_track: "This song is "
+track_information: "{{ title }} by {{ artist }}"
+
 end_of_queue: "There is no more music queued"
 nothing_playing: "There is no music playing"
+intent_not_supported: "Sorry, I can't do that yet"
