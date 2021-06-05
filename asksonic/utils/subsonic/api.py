@@ -8,20 +8,22 @@ class Subsonic(Connection):
     def __init__(
         self,
         baseUrl: str, username: str, password: str, port: int,
-        extra_param: tuple
+        extra_secret: str
     ) -> None:
         super().__init__(baseUrl, username, password, port)
-        self._extra_param = extra_param
+        self._extra_secret = extra_secret
 
-    def _getBaseQdict(self) -> dict[str, str]:
-        qdict = super()._getBaseQdict()
-        if self._extra_param:
-            qdict.update([self._extra_param])
-        return qdict
+    def _getRequest(self, viewName: str, query: dict = {}) -> Request:
+        req = super()._getRequest(viewName=viewName, query=query)
+        if self._extra_secret:
+            req.add_header('asksonic-secret', self._extra_secret)
+        return req
 
     def request_url(self, request: Request) -> str:
         url = request.get_full_url()
         query = request.data.decode('UTF-8')
+        if self._extra_secret:
+            query += f'&asksonic-secret={self._extra_secret}'
         return f'{url}?{query}'
 
     def random_tracks(self, count: int) -> list[Track]:
@@ -34,16 +36,10 @@ class Subsonic(Connection):
 subsonic_url = getenv('ASKS_SUBSONIC_URL', '')
 subsonic_user = getenv('ASKS_SUBSONIC_USER', '')
 subsonic_pass = getenv('ASKS_SUBSONIC_PASS', '')
+extra_secret = getenv('ASKS_EXTRA_SECRET', '')
 
 if any(x == '' for x in [subsonic_url, subsonic_user, subsonic_pass]):
     raise RuntimeError('Subsonic login information is missing from .env')
-
-try:
-    extra_param = tuple(getenv('ASKS_EXTRA_PARAM').split(',', 1))
-    if len(extra_param) != 2:
-        raise RuntimeError('The format of ASKS_EXTRA_PARAM is: "key,value"')
-except AttributeError:
-    extra_param = ()
 
 
 subsonic = Subsonic(
@@ -51,5 +47,5 @@ subsonic = Subsonic(
     subsonic_user,
     subsonic_pass,
     int(getenv('ASKS_SUBSONIC_PORT', 443)),
-    extra_param
+    extra_secret
 )
