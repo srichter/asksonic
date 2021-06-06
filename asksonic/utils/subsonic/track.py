@@ -1,3 +1,6 @@
+from asksonic.utils import subsonic
+
+
 class Track():
     def __init__(
         self,
@@ -16,8 +19,7 @@ class Track():
         self._album = album
         self._album_id = albumId
 
-        from asksonic.utils.subsonic.api import subsonic
-        self._subsonic = subsonic
+        self._subsonic = subsonic.subsonic
 
     def __repr__(self) -> str:
         return (
