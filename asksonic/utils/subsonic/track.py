@@ -23,9 +23,15 @@ class Track():
 
     def __repr__(self) -> str:
         return (
-            f'Track(id={self.id}, title={self.title}, '
-            f'artist={self.artist}, album={self.album})'
+            f'Track(id="{self.id}", title="{self.title}", '
+            f'artist="{self.artist}", artistId="{self.artist_id}", '
+            f'album="{self.album}", albumId="{self.album_id}")'
         )
+
+    def __eq__(self, o: object) -> bool:
+        if not isinstance(o, Track):
+            return False
+        return self.id == o.id
 
     def __str__(self) -> str:
         return f'{self.artist} - {self.title}'
