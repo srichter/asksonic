@@ -1,1 +1,1 @@
-web: gunicorn asksonic:app --bind "${ASKS_HOST:-0.0.0.0}:${ASKS_PORT:-$PORT}"
+web: gunicorn asksonic:app --bind "${ASKS_HOST:-0.0.0.0}:${ASKS_PORT:-$PORT}" --workers 1
