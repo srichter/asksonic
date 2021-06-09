@@ -23,7 +23,6 @@ def playback_stopped() -> tuple:
 @ask.on_playback_nearly_finished()
 def playback_nearly_finished() -> Union[audio, tuple]:
     log('Playback Nearly Finished')
-    queue.current.scrobble(submission=True)
     if queue.up_next:
         log('Enqueuing Next Track')
         return enqueue_track_response(queue.up_next)
@@ -34,6 +33,7 @@ def playback_nearly_finished() -> Union[audio, tuple]:
 @ask.on_playback_finished()
 def playback_finished() -> tuple:
     log('Playback Finished')
+    queue.current.scrobble(submission=True)
     queue.next()
     return empty_response
 
