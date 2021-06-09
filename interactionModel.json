@@ -1,0 +1,75 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "sub sonic",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskSonicShuffleLibraryIntent",
+                    "slots": [],
+                    "samples": [
+                        "shuffle my library",
+                        "play music",
+                        "play my library",
+                        "play songs fnom my library",
+                        "shuffle my music"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskSonicTrackInformationIntent",
+                    "slots": [],
+                    "samples": [
+                        "what's this song",
+                        "what's playing",
+                        "what song",
+                        "who is this by",
+                        "who sings this",
+                        "what is this",
+                        "what is the name of this song",
+                        "what is playing right now",
+                        "what is currently playing",
+                        "what is the current song",
+                        "what song is playing",
+                        "what song is this"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
