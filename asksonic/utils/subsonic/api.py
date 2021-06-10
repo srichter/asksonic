@@ -14,11 +14,10 @@ class Subsonic(Connection):
         super().__init__(baseUrl, username, password, port)
         self._extra_secret = extra_secret
 
-    def _getRequest(self, viewName: str, query: dict = {}) -> Request:
-        req = super()._getRequest(viewName=viewName, query=query)
+    def _doInfoReq(self, req: Request) -> dict:
         if self._extra_secret:
             req.add_header('asksonic-secret', self._extra_secret)
-        return req
+        return super()._doInfoReq(req)
 
     def request_url(self, request: Request) -> str:
         url = request.get_full_url()
