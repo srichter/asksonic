@@ -1,0 +1,27 @@
+{
+    "name": "AskSonic",
+    "description": "AskSonic is an Alexa skill to play music from Subsonic API compatible music servers.",
+    "keywords": [ "alexa", "subsonic", "navidrome"],
+    "repository": "https://github.com/srichter/asksonic",
+    "env": {
+        "ASKS_SUBSONIC_URL": {
+            "description": "The base URL of your Subsonic-compatible music server. (Must be https)"
+        },
+        "ASKS_SUBSONIC_USER": {
+            "description": "Your Subsonic server username"
+        },
+        "ASKS_SUBSONIC_PASS": {
+            "description": "Your Subsonic server password"
+        },
+        "ASKS_SUBSONIC_PORT": {
+            "description": "[Optional] The port your Subsonic server listens on",
+            "value": "443",
+            "required": false
+        },
+        "ASKS_ROUTE_PREFIX": {
+            "description": "[Optional] The endpoint that Alexa will use to communicate with AskSonic",
+            "value": "/alexa",
+            "required": false
+        }
+    }
+}
