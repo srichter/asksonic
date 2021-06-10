@@ -88,3 +88,6 @@ class Track():
     def scrobble(self, submission: bool = False) -> None:
         submit = 'true' if submission else 'false'
         self._subsonic.scrobble(self.id, submission=submit)
+
+    def star(self) -> None:
+        self._subsonic.star(self.id)

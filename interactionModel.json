@@ -19,10 +19,10 @@
                     "name": "AskSonicShuffleLibraryIntent",
                     "slots": [],
                     "samples": [
-                        "shuffle my library",
                         "play music",
                         "play my library",
-                        "play songs fnom my library",
+                        "play songs from my library",
+                        "shuffle my library",
                         "shuffle my music"
                     ]
                 },
@@ -54,18 +54,51 @@
                     "name": "AskSonicTrackInformationIntent",
                     "slots": [],
                     "samples": [
-                        "what's this song",
-                        "what's playing",
-                        "what song",
-                        "who is this by",
-                        "who sings this",
-                        "what is this",
-                        "what is the name of this song",
-                        "what is playing right now",
                         "what is currently playing",
+                        "what is playing right now",
                         "what is the current song",
+                        "what is the name of this song",
+                        "what is this",
                         "what song is playing",
-                        "what song is this"
+                        "what song is this",
+                        "what song",
+                        "what's playing",
+                        "what's this song",
+                        "who is this by",
+                        "who sings this"
+                    ]
+                },
+                {
+                    "name": "AskSonicDetailedTrackInformationIntent",
+                    "slots": [],
+                    "samples": [
+                        "details about this song",
+                        "what album is this song from",
+                        "what album"
+                    ]
+                },
+                {
+                    "name": "AskSonicStarIntent",
+                    "slots": [],
+                    "samples": [
+                        "favorite this song",
+                        "heart this song",
+                        "like this song",
+                        "love this song",
+                        "star this song",
+                        "star this"
+                    ]
+                },
+                {
+                    "name": "AskSonicStarPreviousIntent",
+                    "slots": [],
+                    "samples": [
+                        "favorite the last song",
+                        "heart the last song",
+                        "like the last song",
+                        "love the last song",
+                        "star the last song",
+                        "star the previous song"
                     ]
                 }
             ],

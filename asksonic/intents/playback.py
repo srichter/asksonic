@@ -152,6 +152,43 @@ def track_information() -> statement:
     )
 
 
+@ask.intent('AskSonicDetailedTrackInformationIntent')
+def detailed_track_information() -> statement:
+    log('Current Track Detailed Information')
+    track = queue.current
+    if not track:
+        return statement(render_template('nothing_playing'))
+    return statement(
+        render_template('current_track')
+        + render_template(
+            'detailed_track_information',
+            title=track.title,
+            artist=track.artist,
+            album=track.album,
+        )
+    )
+
+
+@ask.intent('AskSonicStarIntent')
+def star_track() -> statement:
+    log('Star Current Track')
+    track = queue.current
+    if not track:
+        return statement(render_template('nothing_playing'))
+    track.star()
+    return statement(render_template('okay'))
+
+
+@ask.intent('AskSonicStarPreviousIntent')
+def star_previous_track() -> statement:
+    log('Star Previous Track')
+    track = queue.last
+    if not track:
+        return statement(render_template('no_previous_track'))
+    track.star()
+    return statement(render_template('okay'))
+
+
 def log(msg: str) -> None:
     logger.debug(msg)
     logger.debug(queue.status)
