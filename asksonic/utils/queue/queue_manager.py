@@ -3,7 +3,6 @@
 # https://github.com/johnwheeler/flask-ask
 
 import collections
-from copy import copy
 from typing import Optional, Union
 from asksonic.utils.subsonic.track import Track
 

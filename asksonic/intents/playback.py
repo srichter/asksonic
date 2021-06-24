@@ -10,7 +10,8 @@ from asksonic.utils.response import empty_response, enqueue_track_response, \
 @ask.on_playback_started()
 def playback_started() -> tuple:
     log('Playback Started')
-    queue.current.scrobble(submission=False)
+    if queue.current:
+        queue.current.scrobble(submission=False, timestamp=queue.start_time)
     return empty_response
 
 
@@ -33,7 +34,8 @@ def playback_nearly_finished() -> Union[audio, tuple]:
 @ask.on_playback_finished()
 def playback_finished() -> tuple:
     log('Playback Finished')
-    queue.current.scrobble(submission=True)
+    if queue.current:
+        queue.current.scrobble(submission=True, timestamp=queue.start_time)
     queue.next()
     return empty_response
 

@@ -21,7 +21,7 @@ class Subsonic(Connection):
 
     def request_url(self, request: Request) -> str:
         url = request.get_full_url()
-        query = request.data.decode('UTF-8')
+        query = request.data.decode('UTF-8') if request.data else ''
         if self._extra_secret:
             query += f'&asksonic-secret={quote_plus(self._extra_secret)}'
         return f'{url}?{query}'
