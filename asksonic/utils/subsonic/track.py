@@ -1,3 +1,4 @@
+from typing import Optional
 from asksonic.utils import subsonic
 
 
@@ -85,9 +86,15 @@ class Track():
             'image': self.cover_art_url,
         }
 
-    def scrobble(self, submission: bool = False) -> None:
-        submit = 'true' if submission else 'false'
-        self._subsonic.scrobble(self.id, submission=submit)
+    def scrobble(
+        self,
+        submission: bool = False, timestamp: Optional[int] = None
+    ) -> None:
+        self._subsonic.scrobble(
+            self.id,
+            submission=submission,
+            listenTime=timestamp
+        )
 
     def star(self) -> None:
         self._subsonic.star(self.id)

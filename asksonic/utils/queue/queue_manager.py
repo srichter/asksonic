@@ -3,6 +3,7 @@
 # https://github.com/johnwheeler/flask-ask
 
 import collections
+import time
 from typing import Optional, Union
 from asksonic.utils.subsonic.track import Track
 
@@ -28,6 +29,7 @@ class QueueManager():
         status = {
             'Current Position': self.current_position,
             'Current Track': self.current,
+            'Track Started': self.start_time,
             'Next Track': self.up_next,
             'Previous': self.last,
             'History': list(self.history)
@@ -49,6 +51,11 @@ class QueueManager():
         if self.current:
             self.history.append(self.current)
         self._current = track
+        self._start_time = int(time.time())
+
+    @property
+    def start_time(self) -> int:
+        return self._start_time
 
     @property
     def up_next(self) -> Optional[Track]:
