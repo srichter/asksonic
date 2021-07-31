@@ -118,6 +118,7 @@ class QueueManager():
         self._queue = collections.deque()
         self._history = collections.deque()
         self._current = None
+        self._start_time = 0
 
     def _step_forward(self) -> Track:
         track = self._queue.popleft()

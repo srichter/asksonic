@@ -21,6 +21,12 @@ def playback_stopped() -> tuple:
     return empty_response
 
 
+@ask.on_playback_failed()
+def playback_failed() -> tuple:
+    log('Playback Failed')
+    return empty_response
+
+
 @ask.on_playback_nearly_finished()
 def playback_nearly_finished() -> Union[audio, tuple]:
     log('Playback Nearly Finished')

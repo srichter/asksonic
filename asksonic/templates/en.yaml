@@ -1,19 +1,19 @@
-launch_text: "Welcome to Ask Sonic. Ask me to play an artist or song. You can also ask me to play a playlist or your library."
+launch_text: "Welcome to Ask Sonic. Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
 launch_title: "Welcome to AskSonic!"
-launch_content: "Ask me to play an artist or song. You can also ask me to play a playlist or your library."
+launch_content: "Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
 
 pausing: "Pausing"
 resuming: "Resuming"
 stopping: "Stopping"
 okay: "Okay"
 
-playing_library_text: "Playing music from your library"
+playing_library: "Playing music from your library"
 
 current_track: "This song is "
 track_information: "{{ title }} by {{ artist }}"
 detailed_track_information: "{{ title }} by {{ artist }} from the album {{ album }}"
 
-end_of_queue: "There is no more music queued"
+intent_not_supported: "Sorry, I can't do that yet"
 nothing_playing: "There is no music playing"
 no_previous_track: "There is no previous song"
-intent_not_supported: "Sorry, I can't do that yet"
+end_of_queue: "There is no more music queued"
