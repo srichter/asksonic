@@ -100,9 +100,125 @@
                         "star the last song",
                         "star the previous song"
                     ]
+                },
+                {
+                    "name": "AskSonicPlayArtistIntent",
+                    "slots": [
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "samples": [
+                                "{artist}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "play artist {artist}",
+                        "play music by {artist}",
+                        "play songs by {artist}",
+                        "play the artist {artist}"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayAlbumIntent",
+                    "slots": [
+                        {
+                            "name": "album",
+                            "type": "AMAZON.MusicAlbum",
+                            "samples": [
+                                "{album}"
+                            ]
+                        },
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup"
+                        }
+                    ],
+                    "samples": [
+                        "play album {album} by {artist}",
+                        "play album {album}",
+                        "play the album {album} by {artist}",
+                        "play the album {album}",
+                        "play the {artist} album {album}"
+                    ]
                 }
             ],
-            "types": []
-        }
+            "types": [
+                {
+                    "name": "AMAZON.MusicAlbum",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Yellowcard"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "AskSonicPlayArtistIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Artist"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayAlbumIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "album",
+                            "type": "AMAZON.MusicAlbum",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Album"
+                            }
+                        },
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Intent-AskSonic.IntentSlot-Artist",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What artist should I play?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Intent-AskSonic.IntentSlot-Album",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What album should I play?"
+                    }
+                ]
+            }
+        ]
     }
 }
