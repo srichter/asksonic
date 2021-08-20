@@ -38,7 +38,7 @@ It's recommended to use a non-admin user as we will be storing the login credent
 
 ### Running locally
 If you instead prefer to host the AskSonic server yourself, you can follow these steps:
-1. Clone the repository and install requirements: `pip install -r requirements.txt`
+1. Clone the repository and install requirements: `pip install -r requirements.txt`. AskSonic requires Python 3.9+
 2. Copy `.env.example` to `.env` and fill it in. See [Configuration](#configuration) for further details
 3. Install `foreman` (Either the [Gem](https://github.com/ddollar/foreman) or the [Node version](https://github.com/strongloop/node-foreman))
 4. You can start the server with `foreman start`. If you would like to run the server in debug mode, you can use the `Procfile.dev` instead
