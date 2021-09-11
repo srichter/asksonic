@@ -58,13 +58,13 @@ If you instead prefer to host the AskSonic server yourself, you can follow these
 ## Configuration
 | Variable | Description | Required |
 |-|-|:-:|
-| ``ASKS_SUBSONIC_URL`` | The base URL of your Subsonic-compatible music server. Must be https. Must not include the URL path, use the 'server path' parameter for that. Example: 'https://subdomain.domain.com' | ✅ |
+| ``ASKS_SUBSONIC_URL`` | The base URL of your Subsonic-compatible music server. Must be https. Example: `https://subdomain.example.com` | ✅ |
 | ``ASKS_SUBSONIC_USER`` | Your Subsonic server username | ✅ |
 | ``ASKS_SUBSONIC_PASS`` | Your Subsonic server password | ✅ |
-| ``ASKS_SUBSONIC_SERVERPATH`` | The server path pointing to your Subsonic-compatible music server. Goes after the base URL. Must contain only the path, not the domain name. Example: '/path/to/rest' | Default: /rest |
 | ``ASKS_SUBSONIC_PORT`` | The port your Subsonic server listens on (if not the default for https) | Default: 443 |
-| ``ASKS_SUBSONIC_APIVERSION`` | The supported API version of your Subsonic server. Note: Airsonic servers support only up to version 1.15.0 at the moment. | Default: 1.16.1 |
-| ``ASKS_SUBSONIC_APPNAME`` | The name of your application | Default: py-sonic |
+| ``ASKS_SUBSONIC_SERVERPATH`` | The server path of your Subsonic server. Must contain only the path, not the domain. Example: `/path/to/rest` | Default: /rest |
+| ``ASKS_SUBSONIC_APIVERSION`` | The supported API version of your Subsonic server. (Airsonic servers should use version 1.15.0) | Default: 1.16.1 |
+| ``ASKS_SUBSONIC_APPNAME`` | The name of your AskSonic instance | Default: py-sonic |
 | ``ASKS_HOST`` | The host AskSonic's server will listen on | Default: 0.0.0.0 |
 | ``ASKS_PORT`` | The port AskSonic's server will listen on | Default: 4545 or `$PORT` |
 | ``ASKS_ROUTE_PREFIX`` | The endpoint that Alexa will use to communicate with AskSonic. You can obscure your AskSonic instance by customizing this | Default: /alexa |

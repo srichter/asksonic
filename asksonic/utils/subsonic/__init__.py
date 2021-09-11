@@ -19,8 +19,8 @@ subsonic = Subsonic(
     subsonic_url,
     subsonic_user,
     subsonic_pass,
-    subsonic_serverpath,
     subsonic_port,
+    subsonic_serverpath,
     subsonic_apiversion,
     subsonic_appname,
     extra_secret

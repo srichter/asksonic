@@ -9,10 +9,14 @@ from .track import Track
 class Subsonic(Connection):
     def __init__(
         self,
-        baseUrl: str, username: str, password: str, serverPath: str, port: int, apiVersion: str, appName: str,
+        baseUrl: str, username: str, password: str, port: int,
+        serverPath: str, apiVersion: str, appName: str,
         extra_secret: Optional[str] = None
     ) -> None:
-        super().__init__(baseUrl, username, password, port, serverPath, appName, apiVersion)
+        super().__init__(
+            baseUrl=baseUrl, username=username, password=password, port=port,
+            serverPath=serverPath, appName=appName, apiVersion=apiVersion
+        )
         self._extra_secret = extra_secret
 
     def _doInfoReq(self, req: Request) -> dict:
