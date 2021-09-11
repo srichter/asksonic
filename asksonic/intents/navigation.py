@@ -16,7 +16,7 @@ def launch() -> question:
         .simple_card(
             title=render_template('launch_title'),
             content=render_template('launch_content')
-        )
+    )
 
 
 @ask.intent('AskSonicShuffleLibraryIntent')

@@ -5,7 +5,7 @@
     "repository": "https://github.com/srichter/asksonic",
     "env": {
         "ASKS_SUBSONIC_URL": {
-            "description": "The base URL of your Subsonic-compatible music server. (Must be https)"
+            "description": "The base URL of your Subsonic-compatible music server. Must be https"
         },
         "ASKS_SUBSONIC_USER": {
             "description": "Your Subsonic server username"
@@ -16,6 +16,21 @@
         "ASKS_SUBSONIC_PORT": {
             "description": "[Optional] The port your Subsonic server listens on",
             "value": "443",
+            "required": false
+        },
+        "ASKS_SUBSONIC_SERVERPATH": {
+            "description": "[Optional] The server path of your Subsonic server",
+            "value": "/rest",
+            "required": false
+        },
+        "ASKS_SUBSONIC_APIVERSION": {
+            "description": "[Optional] The supported API version of your Subsonic server",
+            "value": "1.16.1",
+            "required": false
+        },
+        "ASKS_SUBSONIC_APPNAME": {
+            "description": "[Optional] The name of your AskSonic instance",
+            "value": "py-sonic",
             "required": false
         },
         "ASKS_ROUTE_PREFIX": {
