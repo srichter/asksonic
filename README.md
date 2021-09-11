@@ -19,7 +19,7 @@ Standard playback controls (_Alexa: Pause, Resume, Previous, Next, etc._) can be
 AskSonic will scrobble tracks with the server after they finish playing.
 
 ### Planned Features
-- Play specific artists, albums, songs, playlists
+- Play specific songs, playlists
 - Add specific songs to the play queue via interactive search
 
 ## Setup
