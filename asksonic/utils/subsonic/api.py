@@ -105,8 +105,7 @@ class Subsonic(Connection):
     def album_tracks(self, album: str, artist: Optional[str]) -> list[Track]:
         if artist:
             found_artist = self.find_artist(artist)
-            if found_artist:
-                artist = found_artist['id']
+            artist = found_artist['id'] if found_artist else ''
         found_album = self.find_album(album, artist)
         if not found_album:
             return []
