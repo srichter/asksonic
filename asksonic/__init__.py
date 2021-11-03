@@ -1,6 +1,6 @@
 from os import getenv
 import logging
-from flask import Flask
+from flask.app import Flask
 from flask_ask import Ask
 
 

@@ -1,7 +1,7 @@
 from typing import Optional, Union
 from flask_ask.models import statement
 from asksonic.utils.response import play_track_response
-from flask import render_template
+from flask.templating import render_template
 from flask_ask import question, audio
 from asksonic import ask, logger, tracks_count
 from asksonic.utils.subsonic import subsonic
