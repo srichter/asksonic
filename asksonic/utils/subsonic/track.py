@@ -8,9 +8,9 @@ class Track():
         id: str,
         title: str,
         artist: str,
-        artistId: str,
         album: str,
         albumId: str,
+        artistId: str = '',
         **kwargs
     ) -> None:
         self._id = id
