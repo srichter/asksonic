@@ -10,12 +10,18 @@ class Subsonic(Connection):
     def __init__(
         self,
         baseUrl: str, username: str, password: str, port: int,
-        serverPath: str, apiVersion: str, appName: str,
+        serverPath: str, apiVersion: str, appName: str, legacyAuth: bool,
         extra_secret: Optional[str] = None
     ) -> None:
         super().__init__(
-            baseUrl=baseUrl, username=username, password=password, port=port,
-            serverPath=serverPath, appName=appName, apiVersion=apiVersion
+              baseUrl=baseUrl
+            , username=username
+            , password=password
+            , port=port
+            , serverPath=serverPath
+            , appName=appName
+            , apiVersion=apiVersion
+            , legacyAuth=legacyAuth
         )
         self._extra_secret = extra_secret
 
