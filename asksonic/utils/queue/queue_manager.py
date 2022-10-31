@@ -18,7 +18,7 @@ class QueueManager():
     to move throughout a queue.
     """
 
-    def __init__(self, tracks: list[Track] = None) -> None:
+    def __init__(self, tracks: Optional[list[Track]] = None) -> None:
         self.clear()
         if tracks:
             self.extend(tracks)
