@@ -23,18 +23,10 @@ AskSonic will scrobble tracks with the server after they finish playing.
 - Add specific songs to the play queue via interactive search
 
 ## Setup
-AskSonic can easily run in a free [Heroku dyno](#running-on-heroku), or run [alongside your Subsonic server](#running-locally). Once it's running, you'll need to [Create the Alexa skill](#creating-the-alexa-skill)
+AskSonic can easily run [alongside your Subsonic server](#running-locally). Once it's running, you'll need to [Create the Alexa skill](#creating-the-alexa-skill)
 
 ### Configuring the Subsonic server
 It's recommended to use a non-admin user as we will be storing the login credentials in AskSonic's configuration. Consider how your Subsonic server handles play counts, starred tracks, playlists, etc. to decide if you want to create a new user account or use your existing one. You may want to configure transcoding for this user/player as Alexa has [limited file-type support](https://developer.amazon.com/en-US/docs/alexa/custom-skills/audioplayer-interface-reference.html#audio-stream-requirements).
-
-### Running on Heroku
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/srichter/asksonic)
-1. Create a Heroku account and login
-2. Click the button above
-3. Choose a name for your app. You may want to add random characters to the name to obfuscate your app's URL
-4. Fill in the configuration variables. See [Configuration](#configuration) for further details
-5. Click `Deploy app`. Once deployment completes, click `View` and copy the URL
 
 ### Running locally
 If you instead prefer to host the AskSonic server yourself, you can follow these steps:
