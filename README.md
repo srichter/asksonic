@@ -14,6 +14,8 @@ AskSonic is an Alexa skill to play music from Subsonic API compatible music serv
 - Star tracks
     - _Tell sub sonic to star this song_
     - _Tell sub sonic to star the last song_
+- List albums by artist
+    - _Ask sub sonic to list Yellowcard albums_
 
 Standard playback controls (_Alexa: Pause, Resume, Previous, Next, etc._) can be used without using the skill's name.
 AskSonic will scrobble tracks with the server after they finish playing.
