@@ -58,5 +58,19 @@ def play_album(album: str, artist: Optional[str]) -> Union[audio, statement]:
     )
 
 
+@ask.intent('AskSonicListArtistAlbumsIntent')
+def list_artist_albums(artist: str) -> Union[audio, statement]:
+    log(f'List Artist Albums: {artist}')
+    albums = subsonic.artist_albums(artist)
+    if albums:
+        album_titles = ', '.join([a['name'] for a in albums])
+        return statement(
+            render_template('artist_albums', artist=artist, album_titles=album_titles)
+        )
+    return statement(
+        render_template('artist_not_found', artist=artist)
+    )
+
+
 def log(msg: str) -> None:
     logger.debug(msg)

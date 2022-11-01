@@ -83,12 +83,17 @@ class Subsonic(Connection):
         tracks = [Track(**track) for track in tracks]
         return tracks
 
-    def artist_tracks(self, artist: str, count: int = 50) -> list[Track]:
+    def artist_albums(self, artist: str, count: int = 5) -> list[dict]:
         found_artist = self.find_artist(artist)
         if not found_artist:
             return []
         albums = self.getArtist(found_artist['id'])
-        albums = albums['artist']['album']
+        return albums['artist']['album']
+
+    def artist_tracks(self, artist: str, count: int = 50) -> list[Track]:
+        albums = self.artist_albums(artist)
+        if not albums:
+            return []
         shuffle(albums)
         tracks = []
         for album in albums:
