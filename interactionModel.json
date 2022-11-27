@@ -176,6 +176,10 @@
                         "{mode} playlist {playlist}",
                         "{mode} the playlist {playlist}"
                     ]
+                },
+                {
+                    "name": "AMAZON.ShuffleOnIntent",
+                    "samples": []
                 }
             ],
             "types": [

@@ -197,6 +197,15 @@ def star_previous_track() -> statement:
     return statement(render_template('okay'))
 
 
+@ask.intent('AMAZON.ShuffleOnIntent')
+def shuffle_queue() -> audio:
+    log('Shuffling queue')
+    track = queue.shuffle()
+    if track:
+        return play_track_response(track)
+    return audio().stop()
+
+
 def log(msg: str) -> None:
     logger.debug(msg)
     logger.debug(queue.status)

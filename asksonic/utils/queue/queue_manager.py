@@ -5,6 +5,7 @@
 import collections
 import time
 from typing import Optional, Union
+from random import shuffle
 from asksonic.utils.subsonic.track import Track
 
 
@@ -131,3 +132,11 @@ class QueueManager():
         track = self.history.pop()
         self._current = track
         return track
+
+    def shuffle(self) -> Track:
+        q = self._queue
+        shuffle(q)
+        self.clear()
+        self._queue = q
+        return self._step_forward()
+
