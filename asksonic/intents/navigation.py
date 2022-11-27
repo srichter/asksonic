@@ -59,9 +59,10 @@ def play_album(album: str, artist: Optional[str]) -> Union[audio, statement]:
 
 
 @ask.intent('AskSonicPlayPlaylistIntent')
-def play_playlist(playlist: str) -> Union[audio, statement]:
+def play_playlist(mode: str, playlist: str) -> Union[audio, statement]:
+    shuffle_playlist = True if (mode == 'shuffle') else False
     log('Play playlist {playlist}')
-    tracks = subsonic.playlist_tracks(playlist)
+    tracks = subsonic.playlist_tracks(playlist, shuffle_playlist)
     if tracks:
         track = queue.reset(tracks)
         return play_track_response(

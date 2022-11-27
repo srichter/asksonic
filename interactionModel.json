@@ -165,12 +165,16 @@
                     "slots": [
                         {
                             "name": "playlist",
-                            "type": "AMAZON.SearchQuery"
+                            "type": "AMAZON.MusicPlaylist"
+                        },
+                        {
+                            "name": "mode",
+                            "type": "ToShuffle"
                         }
                     ],
                     "samples": [
-                        "play playlist {playlist}",
-                        "play the playlist {playlist}"
+                        "{mode} playlist {playlist}",
+                        "{mode} the playlist {playlist}"
                     ]
                 }
             ],
@@ -181,6 +185,21 @@
                         {
                             "name": {
                                 "value": "Yellowcard"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ToShuffle",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "shuffle"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "play"
                             }
                         }
                     ]
@@ -235,12 +254,19 @@
                     "slots": [
                         {
                             "name": "playlist",
-                            "type": "AMAZON.SearchQuery",
+                            "type": "AMAZON.MusicPlaylist",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Playlist"
                             }
+                        },
+                        {
+                            "name": "mode",
+                            "type": "ToShuffle",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
                         }
                     ]
                 }

@@ -125,7 +125,7 @@ class Subsonic(Connection):
         tracks = [Track(**track) for track in tracks]
         return tracks
 
-    def playlist_tracks(self, playlist: str) -> list[Track]:
+    def playlist_tracks(self, playlist: str, shuffle_playlist: bool) -> list[Track]:
         playlists = self.getPlaylists()
         playlists = playlists['playlists']['playlist']
         playlists = [pls for pls in playlists]
@@ -138,5 +138,7 @@ class Subsonic(Connection):
             return []
         tracks = self.getPlaylist(found_playlist['id'])
         tracks = tracks['playlist']['entry']
+        if shuffle_playlist:
+            shuffle(tracks)
         tracks = [Track(**track) for track in tracks]
         return tracks
