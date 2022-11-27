@@ -8,6 +8,9 @@ AskSonic is an Alexa skill to play music from Subsonic API compatible music serv
     - _Ask sub sonic to play music by Deftones_
 - Play an album
     - _Ask sub sonic to play the album Morning View by Incubus_
+- Play a playlist
+    - _Ask sub sonic to play playlist running_
+    - _Ask sub sonic to shuffle playlist running_ (if you want it shuffled)
 - Current track information
     - _Ask sub sonic what song this is_
     - _Ask sub sonic what album this song is from_
@@ -17,11 +20,11 @@ AskSonic is an Alexa skill to play music from Subsonic API compatible music serv
 - List albums by artist
     - _Ask sub sonic to list Yellowcard albums_
 
-Standard playback controls (_Alexa: Pause, Resume, Previous, Next, etc._) can be used without using the skill's name.
+Standard playback controls (_Alexa: Pause, Resume, Previous, Next, Shuffle, etc._) can be used without using the skill's name.
 AskSonic will scrobble tracks with the server after they finish playing.
 
 ### Planned Features
-- Play specific songs, playlists
+- Play specific songs
 - Add specific songs to the play queue via interactive search
 
 ## Setup
@@ -56,6 +59,7 @@ If you instead prefer to host the AskSonic server yourself, you can follow these
 | ``ASKS_SUBSONIC_USER`` | Your Subsonic server username | ✅ |
 | ``ASKS_SUBSONIC_PASS`` | Your Subsonic server password | ✅ |
 | ``ASKS_SUBSONIC_PORT`` | The port your Subsonic server listens on (if not the default for https) | Default: 443 |
+| ``ASKS_SUBSONIC_LEGACYAUTH`` | Enables legacy authentication without authentication token. Some serves requires this | Default: False |
 | ``ASKS_SUBSONIC_SERVERPATH`` | The server path of your Subsonic server. Must contain only the path, not the domain. Example: `/path/to/rest` | Default: /rest |
 | ``ASKS_SUBSONIC_APIVERSION`` | The supported API version of your Subsonic server. (Airsonic servers should use version 1.15.0) | Default: 1.16.1 |
 | ``ASKS_SUBSONIC_APPNAME`` | The name of your AskSonic instance | Default: py-sonic |
