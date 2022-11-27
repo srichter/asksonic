@@ -124,3 +124,19 @@ class Subsonic(Connection):
         tracks = tracks['album']['song']
         tracks = [Track(**track) for track in tracks]
         return tracks
+
+    def playlist_tracks(self, playlist: str) -> list[Track]:
+        playlists = self.getPlaylists()
+        playlists = playlists['playlists']['playlist']
+        playlists = [pls for pls in playlists]
+        found_playlist = None
+        for pls in playlists:
+            if playlist == pls['name']:
+                found_playlist = pls
+                break
+        if not found_playlist:
+            return []
+        tracks = self.getPlaylist(found_playlist['id'])
+        tracks = tracks['playlist']['entry']
+        tracks = [Track(**track) for track in tracks]
+        return tracks

@@ -159,6 +159,19 @@
                         "play the album {album}",
                         "play the {artist} album {album}"
                     ]
+                },
+                {
+                    "name": "AskSonicPlayPlaylistIntent",
+                    "slots": [
+                        {
+                            "name": "playlist",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "play playlist {playlist}",
+                        "play the playlist {playlist}"
+                    ]
                 }
             ],
             "types": [
@@ -214,6 +227,22 @@
                             "prompts": {}
                         }
                     ]
+                },
+                {
+                    "name": "AskSonicPlayPlaylistIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "playlist",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Playlist"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -234,6 +263,15 @@
                     {
                         "type": "PlainText",
                         "value": "What album should I play?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Intent-AskSonic.IntentSlot-Playlist",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What playlist should I play?"
                     }
                 ]
             }
