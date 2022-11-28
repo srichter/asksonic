@@ -4,6 +4,9 @@ AskSonic is an Alexa skill to play music from Subsonic API compatible music serv
 ## Features
 - Shuffle music from your library
     - _Ask sub sonic to play my library_
+- Play music of a certain genre (random)
+    - _Ask sub sonic to play some country_
+    - _Ask sub sonic to play rock music_
 - Play music from an artist
     - _Ask sub sonic to play music by Deftones_
 - Play an album

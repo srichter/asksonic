@@ -27,6 +27,14 @@ def play_random_tracks() -> audio:
     return play_track_response(track, render_template('playing_library'))
 
 
+@ask.intent('AskSonicShuffleGenreIntent')
+def play_genre_tracks(genre: str) -> audio:
+    log('Shuffle Genre')
+    tracks = subsonic.random_tracks(tracks_count, genre)
+    track = queue.reset(tracks)
+    return play_track_response(track, render_template('playing_genre', genre=genre))
+
+
 @ask.intent('AskSonicPlayArtistIntent')
 def play_artist(artist: str) -> Union[audio, statement]:
     log(f'Play Artist: {artist}')

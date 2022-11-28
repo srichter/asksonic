@@ -11,6 +11,7 @@ playing_library: "Playing music from your library"
 playing_artist: "Playing music by {{ artist }}"
 playing_album: "Playing the album {{ album }} {{ 'by {}'.format(artist) if artist }}"
 playing_playlist: "Playing playlist {{ playlist }}"
+playing_genre: "Playing some {{ genre }} music"
 
 current_track: "This song is "
 track_information: "{{ title }} by {{ artist }}"

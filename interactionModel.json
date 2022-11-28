@@ -180,6 +180,27 @@
                 {
                     "name": "AMAZON.ShuffleOnIntent",
                     "samples": []
+                },
+                {
+                    "name": "AskSonicShuffleGenreIntent",
+                    "slots": [
+                        {
+                            "name": "genre",
+                            "type": "AMAZON.Genre"
+                        }
+                    ],
+                    "samples": [
+                        "id like to hear {genre}",
+                        "listen to {genre} music",
+                        "play some {genre}",
+                        "can you play {genre}",
+                        "I want to hear some {genre}",
+                        "I want to hear {genre}",
+                        "shuffle some {genre} music",
+                        "play {genre}",
+                        "play {genre} music",
+                        "play some {genre} music"
+                    ]
                 }
             ],
             "types": [
@@ -308,3 +329,4 @@
         ]
     }
 }
+

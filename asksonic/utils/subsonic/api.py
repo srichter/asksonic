@@ -83,8 +83,8 @@ class Subsonic(Connection):
                 return None
         return self._find_x('album', query)
 
-    def random_tracks(self, count: int = 50) -> list[Track]:
-        tracks = self.getRandomSongs(count)
+    def random_tracks(self, count: int = 50, genre: str = None) -> list[Track]:
+        tracks = self.getRandomSongs(count, genre)
         tracks = tracks['randomSongs']['song']
         tracks = [Track(**track) for track in tracks]
         return tracks
