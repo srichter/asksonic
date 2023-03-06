@@ -13,7 +13,8 @@ route_prefix = getenv('ASKS_ROUTE_PREFIX', '/alexa')
 tracks_count = int(getenv('ASKS_TRACKS_COUNT', 50))
 
 app = Flask(__name__)
-ask = Ask(app, route_prefix, path='templates/en.yaml')
+template_path = f"templates/{getenv('ASK_LANGUAGE', 'en')}.yaml"
+ask = Ask(app, route_prefix, path=template_path)
 
 logger = app.logger
 
