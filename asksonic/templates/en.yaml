@@ -1,6 +1,6 @@
-launch_text: "Welcome to Ask Sonic. Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
-launch_title: "Welcome to AskSonic!"
-launch_content: "Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
+launch_text: "Welcome to Ask Sonic!"
+launch_title: "AskSonic"
+launch_content: "Welcome to Ask Sonic!"
 
 pausing: "Pausing"
 resuming: "Resuming"
@@ -23,3 +23,7 @@ no_previous_track: "There is no previous song"
 end_of_queue: "There is no more music queued"
 artist_not_found: "I couldn't find the artist {{ artist }}"
 album_not_found: "I couldn't find the album {{ album }} {{ 'by {}'.format(artist) if artist }}"
+
+help_text: "Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
+help_title: "Help menu"
+help_content: "Ask me to play an artist, album, or song. You can also ask me to play a playlist or your entire library."
