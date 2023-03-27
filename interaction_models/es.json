@@ -1,0 +1,255 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "navidrome",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskSonicShuffleLibraryIntent",
+                    "slots": [],
+                    "samples": [
+                        "pon música",
+                        "pon música de mi biblioteca",
+                        "reproduce música",
+                        "reproduce mi biblioteca",
+                        "pon canciones de mi bilioteca"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StartOverIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskSonicTrackInformationIntent",
+                    "slots": [],
+                    "samples": [
+                        "qué está sonando",
+                        "qué canción es esta",
+                        "qué está sonando ahora mismo",
+                        "cómo se llama esta canción",
+                        "cómo se llama la canción",
+                        "cómo se llama la canción que está sonando",
+                        "qué es esto",
+                        "qué suena",
+                        "cuál es el nombre de esta canción",
+                        "cuál es el nombre de la canción",
+                        "de quién es esta canción",
+                        "de quién es la canción",
+                        "quién canta esto",
+                        "quién está cantando"
+                    ]
+                },
+                {
+                    "name": "AskSonicDetailedTrackInformationIntent",
+                    "slots": [],
+                    "samples": [
+                        "qué disco está sonando",
+                        "de qué disco es esta canción",
+                        "de qué disco es la canción",
+                        "dame más información de la canción",
+                        "dame más información de esta canción",
+                        "qué disco es este",
+                        "qué disco es"
+                    ]
+                },
+                {
+                    "name": "AskSonicStarIntent",
+                    "slots": [],
+                    "samples": [
+                        "pon esta canción en favoritas",
+                        "pon la canción en favoritas",
+                        "añade esta canción en favoritas",
+                        "añade la canción en favoritas",
+                        "me gusta la canción",
+                        "me gusta esta canción",
+                        "me encanta la canción",
+                        "me encanta esta canción"
+                    ]
+                },
+                {
+                    "name": "AskSonicStarPreviousIntent",
+                    "slots": [],
+                    "samples": [
+                        "pon la última canción en favoritas",
+                        "pon la canción anterior en favoritas",
+                        "añade la última canción en favoritas",
+                        "añade la canción anterior en favoritas",
+                        "me gusta la canción anterior",
+                        "me gusta la última canción",
+                        "me encanta la canción anterior",
+                        "me encanta la última canción"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayArtistIntent",
+                    "slots": [
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "samples": [
+                                "{artist}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "pon a {artist}",
+                        "pon música de {artist}",
+                        "pon canciones de {artist}",
+                        "reproduce a {artist}",
+                        "reproduce música de {artist}",
+                        "reproduce canciones de {artist}"
+                    ]
+                },
+                {
+                    "name": "AskSonicListArtistAlbumsIntent",
+                    "slots": [
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "samples": [
+                                "{artist}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "qué discos tiene {artist}",
+                        "dime los discos de {artist}",
+                        "qué discos son de {artist}",
+                        "dime discos de {artist}",
+                        "dime los discos de {artist}"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayAlbumIntent",
+                    "slots": [
+                        {
+                            "name": "album",
+                            "type": "AMAZON.MusicAlbum",
+                            "samples": [
+                                "{album}"
+                            ]
+                        },
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup"
+                        }
+                    ],
+                    "samples": [
+                        "pon el disco {album} de {artist}",
+                        "pon el disco {album}",
+                        "reproduce el disco {album} de {artist}",
+                        "reproduce el disco {album}",
+                        "pon {album} de {artist}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "AMAZON.MusicAlbum",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Yellowcard"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "AskSonicPlayArtistIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Artist"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayAlbumIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "album",
+                            "type": "AMAZON.MusicAlbum",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Album"
+                            }
+                        },
+                        {
+                            "name": "artist",
+                            "type": "AMAZON.MusicGroup",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Intent-AskSonic.IntentSlot-Artist",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "¿Qué artista quieres que ponga?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Intent-AskSonic.IntentSlot-Album",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "¿Qué disco quieres que ponga?"
+                    }
+                ]
+            }
+        ]
+    }
+}
