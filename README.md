@@ -41,7 +41,7 @@ If you instead prefer to host the AskSonic server yourself, you can follow these
 ### Creating the Alexa Skill
 1. [Visit the Alexa Console](https://developer.amazon.com/alexa/console/ask) and select `Create Skill`. Use the same Amazon account that is logged in to your Alexa-powered device
 2. Enter a name for your skill (this doesn't affect how you invoke the skill from Alexa). Select `Custom` for the model and `Provision your Own` for the backend. Select `Start from Scratch` for the skill template
-3. Once the skill is created, from the skill menu, select `Interaction Model -> JSON Editor` and paste in the contents of your preferred language's interaction model (EN:  [interactionModel.json](/../../raw/main/interaction_models/en.json)). Then select `Save Model`. Check all available interaction models [here](https://github.com/srichter/asksonic/tree/main/interaction_models)
+3. Once the skill is created, from the skill menu, select `Interaction Model -> JSON Editor` and paste in the contents of your preferred language's interaction model (English: [en.json](/../../raw/main/interaction_models/en.json)). Then select `Save Model`. Check all available languages [here](https://github.com/srichter/asksonic/tree/main/interaction_models)
 4. Select `Invocation` from the menu. Here you can adjust how you invoke the skill from within Alexa
 5. Select `Endpoint` from the menu. Change to `HTTPS` and enter the URL to your AskSonic instance under `Default Region`. If you customized `ASKS_ROUTE_PREFIX`, add that to the end of the URL, otherwise add `/alexa`. Select the SSL certificate type.
 6. Select `Interfaces` from menu. Enable the Audio Player interface
