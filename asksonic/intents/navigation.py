@@ -8,7 +8,6 @@ from asksonic.utils.subsonic import subsonic
 from . import queue
 
 
-@ask.intent('AMAZON.HelpIntent')
 @ask.launch
 def launch() -> question:
     log('Launch')
@@ -16,6 +15,15 @@ def launch() -> question:
         .simple_card(
             title=render_template('launch_title'),
             content=render_template('launch_content')
+    )
+
+@ask.intent('AMAZON.HelpIntent')
+def help_intent() -> question:
+    log('Help')
+    return question(render_template('help_text')) \
+        .simple_card(
+            title=render_template('help_title'),
+            content=render_template('help_content')
     )
 
 
