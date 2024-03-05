@@ -10,8 +10,13 @@ from asksonic.utils.response import empty_response, enqueue_track_response, \
 @ask.on_playback_started()
 def playback_started() -> tuple:
     log('Playback Started')
-    if queue.current:
-        queue.current.scrobble(submission=False, timestamp=queue.start_time)
+    # this will exception out if LAST FM isn't setup on sonic api
+    try:
+        if queue.current:
+            queue.current.scrobble(submission=False, timestamp=queue.start_time)
+    except:
+        pass
+        
     return empty_response
 
 
