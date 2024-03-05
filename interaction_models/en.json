@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "sub sonic",
+            "invocationName": "jammy now",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -23,7 +23,8 @@
                         "play my library",
                         "play songs from my library",
                         "shuffle my library",
-                        "shuffle my music"
+                        "shuffle my music",
+                        "play my playlist"
                     ]
                 },
                 {
@@ -138,26 +139,15 @@
                     ]
                 },
                 {
-                    "name": "AskSonicPlayAlbumIntent",
+                    "name": "AskSonicPlayListIntent",
                     "slots": [
                         {
-                            "name": "album",
-                            "type": "AMAZON.MusicAlbum",
-                            "samples": [
-                                "{album}"
-                            ]
-                        },
-                        {
-                            "name": "artist",
+                            "name": "playlist",
                             "type": "AMAZON.MusicGroup"
                         }
                     ],
                     "samples": [
-                        "play album {album} by {artist}",
-                        "play album {album}",
-                        "play the album {album} by {artist}",
-                        "play the album {album}",
-                        "play the {artist} album {album}"
+                        "play the playlist"
                     ]
                 }
             ],
@@ -193,27 +183,12 @@
                     ]
                 },
                 {
-                    "name": "AskSonicPlayAlbumIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "album",
-                            "type": "AMAZON.MusicAlbum",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Album"
-                            }
-                        },
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
-                        }
-                    ]
+                    "name": "AskSonicPlayListIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.1406286725120"
+                    },
+                    "slots": []
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -234,6 +209,15 @@
                     {
                         "type": "PlainText",
                         "value": "What album should I play?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.1406286725120",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What playlist do you want?"
                     }
                 ]
             }

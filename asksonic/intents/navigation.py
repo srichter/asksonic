@@ -40,6 +40,18 @@ def play_artist(artist: str) -> Union[audio, statement]:
     return statement(render_template('artist_not_found', artist=artist))
 
 
+@ask.intent('AskSonicPlayListIntent')
+def play_playlist(playlist: str) -> Union[audio, statement]:
+    log(f'Play Playlist: {playlist}')
+    tracks = subsonic.artist_tracks(playlist, tracks_count)
+    if tracks:
+        track = queue.reset(tracks)
+        return play_track_response(
+            track,
+            render_template('playing_artist', artist=track.artist)
+        )
+    return statement(render_template('artist_not_found', artist=playlist)
+                     
 @ask.intent('AskSonicPlayAlbumIntent')
 def play_album(album: str, artist: Optional[str]) -> Union[audio, statement]:
     log(f'Play Album: {artist} - {album}')
