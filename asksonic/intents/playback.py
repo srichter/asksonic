@@ -45,8 +45,13 @@ def playback_nearly_finished() -> Union[audio, tuple]:
 @ask.on_playback_finished()
 def playback_finished() -> tuple:
     log('Playback Finished')
-    if queue.current:
-        queue.current.scrobble(submission=True, timestamp=queue.start_time)
+    # This will exception out if last.fm is not setup
+    try:
+        if queue.current:
+            queue.current.scrobble(submission=True, timestamp=queue.start_time)
+    except:
+        pass
+        
     queue.next()
     return empty_response
 
