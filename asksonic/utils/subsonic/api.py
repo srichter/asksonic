@@ -4,6 +4,7 @@ from libsonic import Connection
 from urllib.request import Request
 from random import shuffle
 from .track import Track
+from asksonic import logger
 
 
 class Subsonic(Connection):
@@ -110,6 +111,24 @@ class Subsonic(Connection):
                 continue
         shuffle(tracks)
         return tracks
+    
+    def get_playlist(self, playlist: str, count: int = 50) -> list[Track]:
+        playlists = self.getPlaylists()
+        logger.debug(str(playlists))
+        id = -1
+        tracks = []
+        if not playlists:
+            return []
+        for id in playlists['playlists']['playlist']:
+            if playlist.lower() == id['name'].lower():
+                id = id['id']
+                break
+        playListEntry = self.getPlaylist(id)
+        for track in playListEntry['playlist']['entry']:
+            tracks.append(Track(**track))
+                           
+        return tracks
+
 
     def album_tracks(self, album: str, artist: Optional[str]) -> list[Track]:
         if artist:

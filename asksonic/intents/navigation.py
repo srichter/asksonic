@@ -7,7 +7,6 @@ from asksonic import ask, logger, tracks_count
 from asksonic.utils.subsonic import subsonic
 from . import queue
 
-
 @ask.intent('AMAZON.HelpIntent')
 @ask.launch
 def launch() -> question:
@@ -40,17 +39,17 @@ def play_artist(artist: str) -> Union[audio, statement]:
     return statement(render_template('artist_not_found', artist=artist))
 
 
-@ask.intent('AskSonicPlayListIntent')
+@ask.intent('AskSonicPlayPlayListIntent')
 def play_playlist(playlist: str) -> Union[audio, statement]:
     log(f'Play Playlist: {playlist}')
-    tracks = subsonic.artist_tracks(playlist, tracks_count)
+    tracks = subsonic.get_playlist(playlist, tracks_count)
     if tracks:
         track = queue.reset(tracks)
         return play_track_response(
             track,
             render_template('playing_artist', artist=track.artist)
         )
-    return statement(render_template('artist_not_found', artist=playlist)
+    return statement(render_template('playlist_not_found', playlist=playlist))
                      
 @ask.intent('AskSonicPlayAlbumIntent')
 def play_album(album: str, artist: Optional[str]) -> Union[audio, statement]:
