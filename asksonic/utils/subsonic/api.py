@@ -96,14 +96,18 @@ class Subsonic(Connection):
             return []
         shuffle(albums)
         tracks = []
+        # Fix bug when it can't find album to play
         for album in albums:
-            songs = self.getAlbum(album['id'])
-            songs = songs['album']['song']
-            shuffle(songs)
-            tracks.extend([Track(**track) for track in songs])
-            if len(tracks) >= count:
-                tracks = tracks[:count]
-                break
+            try:
+                songs = self.getAlbum(album['id'])
+                songs = songs['album']['song']
+                shuffle(songs)
+                tracks.extend([Track(**track) for track in songs])
+                if len(tracks) >= count:
+                    tracks = tracks[:count]
+                    break
+            except:
+                continue
         shuffle(tracks)
         return tracks
 
