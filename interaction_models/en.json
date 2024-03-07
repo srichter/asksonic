@@ -165,24 +165,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "name": "values",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "old skule",
-                                "synonyms": [
-                                    "old school"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "classical"
-                            }
-                        }
-                    ]
                 }
             ]
         },
