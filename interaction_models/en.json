@@ -159,6 +159,24 @@
                         "play the album {album}",
                         "play the {artist} album {album}"
                     ]
+                },
+                {
+                    "name": "AskSonicPlayPlayListIntent",
+                    "slots": [
+                        {
+                            "name": "playlist",
+                            "type": "AMAZON.MusicAlbum",
+                            "samples": [
+                                "{playlist}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "play the mix {playlist}",
+                        "open playlist {playlist}",
+                        "play playlist {playlist}",
+                        "Play the playlist {playlist}"
+                    ]
                 }
             ],
             "types": [
@@ -214,6 +232,22 @@
                             "prompts": {}
                         }
                     ]
+                },
+                {
+                    "name": "AskSonicPlayPlayListIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "playlist",
+                            "type": "AMAZON.MusicAlbum",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1552392366824.395353797063"
+                            }
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -234,6 +268,24 @@
                     {
                         "type": "PlainText",
                         "value": "What album should I play?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.589542519485",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What playlist do you want to play?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1552392366824.395353797063",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which playlist do you want to play?"
                     }
                 ]
             }
