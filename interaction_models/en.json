@@ -165,10 +165,16 @@
                     "slots": [
                         {
                             "name": "playlist",
-                            "type": "AMAZON.MusicAlbum"
+                            "type": "AMAZON.MusicAlbum",
+                            "samples": [
+                                "{playlist}"
+                            ]
                         }
                     ],
                     "samples": [
+                        "play the mix {playlist}",
+                        "open playlist {playlist}",
+                        "play playlist {playlist}",
                         "Play the playlist {playlist}"
                     ]
                 }
@@ -225,258 +231,21 @@
                             "elicitationRequired": false,
                             "prompts": {}
                         }
-                    ]
-                }
-            ],
-            "delegationStrategy": "ALWAYS"
-        },
-        "prompts": [
-            {
-                "id": "Elicit.Intent-AskSonic.IntentSlot-Artist",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "What artist should I play?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Intent-AskSonic.IntentSlot-Album",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "What album should I play?"
-                    }
-                ]
-            }
-        ]
-    }
-}{
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "sub sonic",
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AskSonicShuffleLibraryIntent",
-                    "slots": [],
-                    "samples": [
-                        "play music",
-                        "play my library",
-                        "play songs from my library",
-                        "shuffle my library",
-                        "shuffle my music"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PauseIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ResumeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.NextIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PreviousIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StartOverIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AskSonicTrackInformationIntent",
-                    "slots": [],
-                    "samples": [
-                        "what is currently playing",
-                        "what is playing right now",
-                        "what is the current song",
-                        "what is the name of this song",
-                        "what is this",
-                        "what song is playing",
-                        "what song is this",
-                        "what song",
-                        "what's playing",
-                        "what's this song",
-                        "who is this by",
-                        "who sings this"
-                    ]
-                },
-                {
-                    "name": "AskSonicDetailedTrackInformationIntent",
-                    "slots": [],
-                    "samples": [
-                        "details about this song",
-                        "what album is this song from",
-                        "what album"
-                    ]
-                },
-                {
-                    "name": "AskSonicStarIntent",
-                    "slots": [],
-                    "samples": [
-                        "favorite this song",
-                        "heart this song",
-                        "like this song",
-                        "love this song",
-                        "star this song",
-                        "star this"
-                    ]
-                },
-                {
-                    "name": "AskSonicStarPreviousIntent",
-                    "slots": [],
-                    "samples": [
-                        "favorite the last song",
-                        "heart the last song",
-                        "like the last song",
-                        "love the last song",
-                        "star the last song",
-                        "star the previous song"
-                    ]
-                },
-                {
-                    "name": "AskSonicPlayArtistIntent",
-                    "slots": [
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup",
-                            "samples": [
-                                "{artist}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "play artist {artist}",
-                        "play music by {artist}",
-                        "play songs by {artist}",
-                        "play the artist {artist}"
-                    ]
-                },
-                {
-                    "name": "AskSonicListArtistAlbumsIntent",
-                    "slots": [
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup",
-                            "samples": [
-                                "{artist}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "tell me albums by {artist}",
-                        "list albums by {artist}",
-                        "list {artist} albums",
-                        "what albums does {artist} have"
-                    ]
-                },
-                {
-                    "name": "AskSonicPlayAlbumIntent",
-                    "slots": [
-                        {
-                            "name": "album",
-                            "type": "AMAZON.MusicAlbum",
-                            "samples": [
-                                "{album}"
-                            ]
-                        },
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup"
-                        }
-                    ],
-                    "samples": [
-                        "play album {album} by {artist}",
-                        "play album {album}",
-                        "play the album {album} by {artist}",
-                        "play the album {album}",
-                        "play the {artist} album {album}"
                     ]
                 },
                 {
                     "name": "AskSonicPlayPlayListIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
                     "slots": [
                         {
                             "name": "playlist",
-                            "type": "AMAZON.MusicAlbum"
-                        }
-                    ],
-                    "samples": [
-                        "Play the playlist {playlist}"
-                    ]
-                }
-            ],
-            "types": [
-                {
-                    "name": "AMAZON.MusicAlbum",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "Yellowcard"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        "dialog": {
-            "intents": [
-                {
-                    "name": "AskSonicPlayArtistIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Artist"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "AskSonicPlayAlbumIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "album",
                             "type": "AMAZON.MusicAlbum",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Intent-AskSonic.IntentSlot-Album"
+                                "elicitation": "Elicit.Slot.1552392366824.395353797063"
                             }
-                        },
-                        {
-                            "name": "artist",
-                            "type": "AMAZON.MusicGroup",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
                         }
                     ]
                 }
@@ -499,6 +268,24 @@
                     {
                         "type": "PlainText",
                         "value": "What album should I play?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.589542519485",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What playlist do you want to play?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1552392366824.395353797063",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which playlist do you want to play?"
                     }
                 ]
             }
