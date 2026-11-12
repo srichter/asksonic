@@ -64,6 +64,7 @@ If you instead prefer to host the AskSonic server yourself, you can follow these
 | ``ASKS_ROUTE_PREFIX`` | The endpoint that Alexa will use to communicate with AskSonic. You can obscure your AskSonic instance by customizing this | Default: /alexa |
 | ``ASKS_TRACKS_COUNT`` | The number of tracks enqueued at a time | Default: 50 |
 | ``ASKS_EXTRA_SECRET`` | An extra secret that will be appended to all requests as either a header or to the query string. Useful for authenticating requests if your Subsonic server is behind a WAF such as Cloudflare | ❌ |
+| ``ASKS_PUBLIC_URL`` | Public base URL (scheme and host, no trailing slash) substituted into the stream and cover-art URLs handed to Alexa, which Amazon's cloud fetches directly. API calls from AskSonic itself still use `ASKS_SUBSONIC_URL`, so that can stay a fast local address. Example: `https://music.example.com` | ❌ |
 
 ## Acknowledgements
 AskSonic was inspired by the following projects:

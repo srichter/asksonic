@@ -5,7 +5,9 @@ from typing import Optional, Union
 from urllib.parse import quote, urlparse
 
 import requests
-from flask import Response, abort, request as flask_request, stream_with_context
+from flask import (
+    Response, abort, request as flask_request, stream_with_context
+)
 from flask.templating import render_template
 from flask_ask import audio, statement
 from asksonic import app, ask, logger, route_prefix
@@ -37,7 +39,8 @@ def radio_stream_url(station: dict) -> str:
     else:
         base = flask_request.host_url.rstrip('/')
     token = radio_token(station['id'])
-    return f'{base}{route_prefix}/radio/{quote(station["id"], safe="")}?t={token}'
+    station_id = quote(station["id"], safe="")
+    return f'{base}{route_prefix}/radio/{station_id}?t={token}'
 
 
 def play_radio_response(station: dict, speech: str = '') -> audio:

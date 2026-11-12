@@ -8,7 +8,8 @@ empty_response = (
 )
 
 
-def play_track_response(track: Track, speech: str = '', offset: int = 0) -> audio:
+def play_track_response(
+        track: Track, speech: str = '', offset: int = 0) -> audio:
     return audio(speech) \
         .play(track.stream_url, offset=offset) \
         .metadata(**track.metadata)
