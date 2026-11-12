@@ -3,6 +3,7 @@
 # https://github.com/johnwheeler/flask-ask
 
 import collections
+import random
 import time
 from typing import Optional, Union
 from asksonic.utils.subsonic.track import Track
@@ -19,9 +20,22 @@ class QueueManager():
     """
 
     def __init__(self, tracks: Optional[list[Track]] = None) -> None:
+        # Not reset by clear()/reset() - repeat is a player-wide setting that
+        # should persist across switching to different content, same as on a
+        # typical streaming service.
+        self._repeat = False
         self.clear()
         if tracks:
             self.extend(tracks)
+
+    @property
+    def repeat(self) -> bool:
+        """Whether the current track should repeat instead of advancing"""
+        return self._repeat
+
+    @repeat.setter
+    def repeat(self, value: bool) -> None:
+        self._repeat = value
 
     @property
     def status(self) -> dict[str, Union[str, list[str]]]:
@@ -32,7 +46,9 @@ class QueueManager():
             'Track Started': self.start_time,
             'Next Track': self.up_next,
             'Previous': self.last,
-            'History': list(self.history)
+            'History': list(self.history),
+            'Offset': self.offset,
+            'Radio': self.radio,
         }
         return status
 
@@ -52,10 +68,31 @@ class QueueManager():
             self.history.append(self.current)
         self._current = track
         self._start_time = int(time.time())
+        self._offset = 0
 
     @property
     def start_time(self) -> int:
         return self._start_time
+
+    @property
+    def offset(self) -> int:
+        """Playback position (ms) of the current Track/radio stream, as of
+        the last PlaybackStopped/pause. Used to resume without relying on
+        flask-ask's short-lived current_stream cache."""
+        return self._offset
+
+    @offset.setter
+    def offset(self, value: int) -> None:
+        self._offset = value
+
+    @property
+    def radio(self) -> Optional[dict]:
+        """The currently playing Navidrome internet radio station, if any"""
+        return self._radio
+
+    @radio.setter
+    def radio(self, station: Optional[dict]) -> None:
+        self._radio = station
 
     @property
     def up_next(self) -> Optional[Track]:
@@ -103,6 +140,12 @@ class QueueManager():
         """Add a Track to the beginning of the queue"""
         self._queue.appendleft(track)
 
+    def shuffle(self) -> None:
+        """Randomize the order of the remaining (not-yet-played) queue"""
+        items = list(self._queue)
+        random.shuffle(items)
+        self._queue = collections.deque(items)
+
     def end_current(self) -> None:
         """Move the current Track to history"""
         self.current = None
@@ -119,6 +162,8 @@ class QueueManager():
         self._history = collections.deque()
         self._current = None
         self._start_time = 0
+        self._offset = 0
+        self._radio = None
 
     def _step_forward(self) -> Track:
         track = self._queue.popleft()
@@ -130,4 +175,5 @@ class QueueManager():
             self._queue.appendleft(self.current)
         track = self.history.pop()
         self._current = track
+        self._offset = 0
         return track

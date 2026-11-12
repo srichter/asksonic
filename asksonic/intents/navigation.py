@@ -75,5 +75,68 @@ def list_artist_albums(artist: str) -> Union[audio, statement]:
     )
 
 
+@ask.intent('AskSonicPlayPlaylistIntent')
+def play_playlist(playlist: str) -> Union[audio, statement]:
+    log(f'Play Playlist: {playlist}')
+    found = subsonic.find_playlist(playlist)
+    tracks = subsonic.playlist_tracks(found['id']) if found else []
+    if tracks:
+        track = queue.reset(tracks)
+        return play_track_response(
+            track,
+            render_template('playing_playlist', playlist=found['name'])
+        )
+    return statement(
+        render_template('playlist_not_found', playlist=playlist)
+    )
+
+
+@ask.intent('AskSonicListPlaylistsIntent')
+def list_playlists() -> statement:
+    log('List Playlists')
+    playlists = subsonic.list_playlists()
+    if playlists:
+        names = ', '.join(p['name'] for p in playlists)
+        return statement(render_template('playlists_list', playlists=names))
+    return statement(render_template('no_playlists'))
+
+
+@ask.intent('AskSonicPlaySongIntent')
+def play_song(song: str) -> Union[audio, statement]:
+    log(f'Play Song: {song}')
+    tracks = subsonic.search_tracks(song)
+    if tracks:
+        track = queue.reset(tracks)
+        return play_track_response(
+            track,
+            render_template(
+                'playing_song', title=track.title, artist=track.artist
+            )
+        )
+    return statement(render_template('song_not_found', song=song))
+
+
+@ask.intent('AskSonicPlayFavoritesIntent')
+def play_favorites() -> Union[audio, statement]:
+    log('Play Favorites')
+    tracks = subsonic.favorite_tracks(tracks_count)
+    if tracks:
+        track = queue.reset(tracks)
+        return play_track_response(track, render_template('playing_favorites'))
+    return statement(render_template('no_favorites'))
+
+
+@ask.intent('AskSonicPlayGenreIntent')
+def play_genre(genre: str) -> Union[audio, statement]:
+    log(f'Play Genre: {genre}')
+    tracks = subsonic.genre_tracks(genre, tracks_count)
+    if tracks:
+        track = queue.reset(tracks)
+        return play_track_response(
+            track, render_template('playing_genre', genre=genre)
+        )
+    return statement(render_template('genre_not_found', genre=genre))
+
+
 def log(msg: str) -> None:
     logger.debug(msg)

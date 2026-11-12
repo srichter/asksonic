@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "sub sonic",
+            "invocationName": "navi jukebox",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -158,6 +158,111 @@
                         "play the album {album} by {artist}",
                         "play the album {album}",
                         "play the {artist} album {album}"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayPlaylistIntent",
+                    "slots": [
+                        {
+                            "name": "playlist",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "play playlist {playlist}",
+                        "play my {playlist} playlist",
+                        "play the playlist {playlist}",
+                        "play the {playlist} playlist"
+                    ]
+                },
+                {
+                    "name": "AskSonicListPlaylistsIntent",
+                    "slots": [],
+                    "samples": [
+                        "what playlists do I have",
+                        "list my playlists",
+                        "list playlists",
+                        "tell me my playlists"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlaySongIntent",
+                    "slots": [
+                        {
+                            "name": "song",
+                            "type": "AMAZON.MusicRecording",
+                            "samples": [
+                                "{song}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "play the song {song}",
+                        "play song {song}"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayFavoritesIntent",
+                    "slots": [],
+                    "samples": [
+                        "play my favorites",
+                        "play favorites",
+                        "play my starred songs",
+                        "play starred songs",
+                        "play my liked songs"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayGenreIntent",
+                    "slots": [
+                        {
+                            "name": "genre",
+                            "type": "AMAZON.Genre",
+                            "samples": [
+                                "{genre}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "play some {genre}",
+                        "play {genre} music",
+                        "play some {genre} music"
+                    ]
+                },
+                {
+                    "name": "AskSonicUnstarIntent",
+                    "slots": [],
+                    "samples": [
+                        "unstar this song",
+                        "unstar this",
+                        "unfavorite this song",
+                        "unlike this song",
+                        "remove this song from favorites"
+                    ]
+                },
+                {
+                    "name": "AskSonicUnstarPreviousIntent",
+                    "slots": [],
+                    "samples": [
+                        "unstar the last song",
+                        "unstar the previous song",
+                        "remove the last song from favorites"
+                    ]
+                },
+                {
+                    "name": "AskSonicPlayRadioIntent",
+                    "slots": [
+                        {
+                            "name": "station",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "play radio station {station}",
+                        "play the radio station {station}",
+                        "play {station} radio",
+                        "play the {station} station",
+                        "play station {station}"
                     ]
                 }
             ],
