@@ -67,7 +67,12 @@ class Track():
 
     @property
     def stream_url(self) -> str:
-        request = self._subsonic._getRequest('stream.view', {'id': self.id})
+        # Force mp3 - Alexa's AudioPlayer doesn't support FLAC/OGG/WAV, only
+        # mp3 (and limited aac). Navidrome only transcodes when the source
+        # isn't already mp3, so this is a no-op for files that already are.
+        request = self._subsonic._getRequest(
+            'stream.view', {'id': self.id, 'format': 'mp3'}
+        )
         return self._subsonic.request_url(request)
 
     @property
@@ -98,3 +103,6 @@ class Track():
 
     def star(self) -> None:
         self._subsonic.star(self.id)
+
+    def unstar(self) -> None:
+        self._subsonic.unstar(self.id)

@@ -4,3 +4,4 @@ queue = QueueManager()
 
 from . import navigation
 from . import playback
+from . import radio
